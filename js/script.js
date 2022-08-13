@@ -52,12 +52,12 @@ const greeting = document.querySelector('.greeting');
 greeting.textContent = `Good ${timeOfDay} `;
 // -------------------------------Input.value
 const name = document.querySelector('.name');
-function setLocalStorage() {
+const setLocalStorage = () => {
     localStorage.setItem('name', name.value);
 }
 window.addEventListener('beforeunload', setLocalStorage);
 
-function getLocalStorage() {
+const getLocalStorage = () => {
     if (localStorage.getItem('name')) {
         name.value = localStorage.getItem('name');
     }
@@ -67,7 +67,7 @@ window.addEventListener('load', getLocalStorage);
 
 // -------------------------------Slider images // -------------------------------
 
-function getRandomInt(min, max) {
+const getRandomInt = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
@@ -75,10 +75,10 @@ function getRandomInt(min, max) {
 const bgNum = getRandomInt(1, 20);
 const funcBgNum = `${bgNum}.jpg')`;
 // console.log(bgNum);
-function leftFillNum(num, targetLength) {
+const setBg = (num, targetLength) => {
     return num.toString().padStart(targetLength, "url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/08.jpg')");
 }
-const bodyBackgroundImage = leftFillNum(funcBgNum, 104);
+const bodyBackgroundImage = setBg(funcBgNum, 104);
 // console.log(bodyBackgroundImage);
 const body = document.querySelector('.body-bgr');
 body.style.backgroundImage = `${bodyBackgroundImage}`

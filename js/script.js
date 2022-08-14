@@ -13,10 +13,9 @@ const time = document.querySelector('.time');
 time.textContent = `${showTimeOfDay}`;
 
 // -------------------------------Date
-
 const showDate = () => {
     const date = new Date();
-    const options = { month: 'long', day: 'numeric' };
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
     const currentDate = date.toLocaleDateString('en-Us', options);
     // console.log(currentDate);
     setTimeout(showDate, 1000);
@@ -26,7 +25,6 @@ const showDateOfDay = showDate();
 const dates = document.querySelector('.date');
 // console.log(dates);
 dates.textContent = `${showDateOfDay}`;
-
 // -------------------------------// -------------------------------
 
 // -------------------------------Greeting // -------------------------------
@@ -71,7 +69,7 @@ const getRandomInt = (min, max) => {
 }
 const bgNum = getRandomInt(1, 20);
 const funcBgNum = `${bgNum}.jpg')`;
-console.log(bgNum);
+// console.log(bgNum);
 const setRandomBgr = (num, targetLength) => {
     return num.toString().padStart(targetLength, "url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/08.jpg')");
 }
@@ -88,7 +86,6 @@ body.style.backgroundImage = `${setBgr}`;
 //         body.style.backgroundImage = `${setBgr}`;
 //     };
 // }
-
 
 // const getSlideNext = () => (bgNum <= 19 ? bgNum + 1 : 1);
 const getSlideNext = () => {
@@ -107,16 +104,6 @@ const getSlideNext = () => {
 const slideNext = document.querySelector('.slide-next');
 slideNext.addEventListener('click', getSlideNext);
 
-// const printNumbers = () => {
-//     let i = randomNumNext;
-//     while (i <= 20) {
-//         console.log(i);
-//         i = i + 1;
-//     }
-// };
-
-
-
 // const getSlidePrev = () => (bgNum >= 2 ? bgNum - 1 : 20);
 const getSlidePrev = () => {
     let randomNumPrev;
@@ -134,14 +121,57 @@ const getSlidePrev = () => {
 const slidePrev = document.querySelector('.slide-prev');
 slidePrev.addEventListener('click', getSlidePrev);
 
-// const printNumbers = (initialNumber) => {
-//     let i = initialNumber;
-//     while (i >= 1) {
-//         console.log(i);
-//         i = i - 1;
+// -------------------------------// -------------------------------
+
+// ------------------------------- Weather widget // -------------------------------
+
+
+const weatherIcon = document.querySelector('.weather-icon');
+const city = document.querySelector('.city')
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const wind = document.querySelector('.wind');
+const humidity = document.querySelector('.humidity');
+
+async function getWeather() {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=Lutsk&lang=en&appid=7e93e92be7eab324b59a066d98dbff84&units=metric`;
+    const res = await fetch(url);
+    const data = await res.json();
+    weatherIcon.className = 'weather-icon owf';
+
+    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+    temperature.textContent = `${Math.round(data.main.temp)}°C`;
+    weatherDescription.textContent = data.weather[0].description;
+    wind.textContent = `Wind speed: ${Math.round(data.wind.speed)} m/s`;
+    humidity.textContent = `Humidity: ${data.main.humidity} %`;
+
+}
+getWeather();
+
+changeCity.addEventListener('change', (event) => {
+    if (event.code === 'Enter') {
+        getWeather();
+    }
+});
+
+// function setCity(event) {
+//     if (event.code === 'Enter') {
+//         getWeather();
+//         city.blur();
 //     }
-// };
+// }
+
+// document.addEventListener('DOMContentLoaded', getWeather);
+// city.addEventListener('keypress', setCity);
+
+
+
+
+// ------------------------------- Weather widget // -------------------------------
+
+
 
 
 
 // -------------------------------// -------------------------------
+

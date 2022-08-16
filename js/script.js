@@ -194,11 +194,13 @@ const getQuotesNext = () => {
 console.log(randomNum);
 const nextQuotes = document.querySelector('.change-quote');
 nextQuotes.addEventListener('click', getQuotesNext);
+
 // -------------------------------// -------------------------------
 
 // ------------------------------- Audio // -------------------------------
 
-const audio = document.querySelector('audio');
+const audio = document.querySelector('.player');
+
 function playAudio() {
     audio.currentTime = 0;
     audio.play();
@@ -206,5 +208,18 @@ function playAudio() {
 function pauseAudio() {
     audio.pause();
 }
+
+
+
+let isPlay = false;
+const playAudioIco = document.querySelector('.play');
+playAudioIco.addEventListener('click', () => {
+    isPlay = true;
+});
+const pauseAudioIco = document.querySelector('.pause');
+pauseAudioIco.addEventListener('click', () => {
+    isPlay = false;
+});
+
 
 // -------------------------------// -------------------------------

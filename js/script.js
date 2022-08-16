@@ -148,11 +148,11 @@ async function getWeather() {
 }
 getWeather();
 
-changeCity.addEventListener('change', (event) => {
-    if (event.code === 'Enter') {
-        getWeather();
-    }
-});
+// changeCity.addEventListener('change', (event) => {
+//     if (event.code === 'Enter') {
+//         getWeather();
+//     }
+// });
 
 // function setCity(event) {
 //     if (event.code === 'Enter') {
@@ -169,9 +169,42 @@ changeCity.addEventListener('change', (event) => {
 
 // ------------------------------- Weather widget // -------------------------------
 
+async function getQuotes() {
+    const quotes = '../js/data.json';
+    const res = await fetch(quotes);
+    const data = await res.json();
+    const quote = document.querySelector('.quote');
+    const author = document.querySelector('.author');
+    const randomNum = getRandomInt(1, 3);
+    quote.textContent = data[randomNum].text;
+    author.textContent = data[randomNum].author;
+    console.log(data);
+}
+getQuotes();
 
-
-
-
+const getQuotesNext = () => {
+    let randomNum;
+    if (bgNum <= 1) {
+        randomNum = bgNum + 1;
+    } else {
+        randomNum = 0;
+    }
+    console.log(randomNum);
+};
+console.log(randomNum);
+const nextQuotes = document.querySelector('.change-quote');
+nextQuotes.addEventListener('click', getQuotesNext);
 // -------------------------------// -------------------------------
 
+// ------------------------------- Audio // -------------------------------
+
+const audio = document.querySelector('audio');
+function playAudio() {
+    audio.currentTime = 0;
+    audio.play();
+}
+function pauseAudio() {
+    audio.pause();
+}
+
+// -------------------------------// -------------------------------
